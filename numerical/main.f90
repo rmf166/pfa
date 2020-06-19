@@ -1010,6 +1010,8 @@
         ccp =0.0_kr
         ccm =0.0_kr
         a   =0.0_kr
+        b   =0.0_kr
+        c   =0.0_kr
 
         j=1
         do n=1,nmax
