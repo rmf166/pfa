@@ -640,6 +640,7 @@
         real(kind=kr), allocatable   :: c2(:,:)
         real(kind=kr), allocatable   :: phio(:)
         real(kind=kr), allocatable   :: phil(:)
+        real(kind=kr), allocatable   :: philo(:)
         real(kind=kr), allocatable   :: s(:)
         real(kind=kr), allocatable   :: sl(:)
         real(kind=kr), allocatable   :: rhoi(:)
@@ -677,8 +678,10 @@
         kount=0
 
         allocate(phio(jmax))
+        allocate(philo(jmax))
         do k=1,kmax
           phio=phi
+          philo=phil
           do sw=1,sweeps
             do j=1,jmax
               s  (j)=0.5_kr*(sigs*phi  (j)+q)
@@ -728,7 +731,7 @@
               rho=10.0_kr
               return
             endif
-            norm1=norm1+(phi(j)-phio(j))**2
+            norm1=norm1+(phi(j)-phio(j))**2+(phil(j)-philo(j))**2
           enddo
           norm1=sqrt(norm1)
 
@@ -758,6 +761,7 @@
         deallocate(c2)
         deallocate(phio)
         deallocate(phil)
+        deallocate(philo)
         deallocate(s)
         deallocate(sl)
         deallocate(rhoi)
@@ -810,6 +814,7 @@
         real(kind=kr), allocatable   :: c2(:,:)
         real(kind=kr), allocatable   :: phio(:)
         real(kind=kr), allocatable   :: phil(:)
+        real(kind=kr), allocatable   :: philo(:)
         real(kind=kr), allocatable   :: s(:)
         real(kind=kr), allocatable   :: sl(:)
         real(kind=kr), allocatable   :: rhoi(:)
@@ -857,8 +862,10 @@
         kount=0
 
         allocate(phio(jmax))
+        allocate(philo(jmax))
         do k=1,kmax
           phio=phi
+          philo=phil
           do sw=1,sweeps
             do j=1,jmax
               s  (j)=0.5_kr*(sigs*phi  (j)+q)
@@ -908,7 +915,7 @@
               rho=10.0_kr
               return
             endif
-            norm1=norm1+(phi(j)-phio(j))**2
+            norm1=norm1+(phi(j)-phio(j))**2+(phil(j)-philo(j))**2
           enddo
           norm1=sqrt(norm1)
 
@@ -939,6 +946,7 @@
         deallocate(c2)
         deallocate(phio)
         deallocate(phil)
+        deallocate(philo)
         deallocate(s)
         deallocate(sl)
         deallocate(rhoi)
