@@ -731,7 +731,7 @@
               rho=10.0_kr
               return
             endif
-            norm1=norm1+(phi(j)-phio(j))**2+(phil(j)-philo(j))**2
+            norm1=norm1+(phi(j)-phio(j))**2 ! +(phil(j)-philo(j))**2 is close to zero
           enddo
           norm1=sqrt(norm1)
 
@@ -915,7 +915,7 @@
               rho=10.0_kr
               return
             endif
-            norm1=norm1+(phi(j)-phio(j))**2+(phil(j)-philo(j))**2
+            norm1=norm1+(phi(j)-phio(j))**2 ! +(phil(j)-philo(j))**2 is close to zero
           enddo
           norm1=sqrt(norm1)
 
