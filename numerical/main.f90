@@ -393,7 +393,7 @@
             jnet=jp-jm
           enddo
 
-          call pcmfd(sigt,sigs,h,p,jmax,q,phi,phil,jp,jm)
+          call pcmfd(sigt,sigs,h,p,jmax,bc,q,phi,phil,jp,jm)
 
           norm1=0.0_kr
           do j=1,jmax
@@ -555,7 +555,7 @@
             jnet=jp-jm
           enddo
 
-          call pcmfd(sigt,sigs,h,p,jmax,q,phi,phil,jp,jm)
+          call pcmfd(sigt,sigs,h,p,jmax,bc,q,phi,phil,jp,jm)
 
           norm1=0.0_kr
           do j=1,jmax
@@ -723,7 +723,7 @@
             jnet=jp-jm
           enddo
 
-          call pcmfd(sigt,sigs,h,p,jmax,q,phi,phil,jp,jm)
+          call pcmfd(sigt,sigs,h,p,jmax,bc,q,phi,phil,jp,jm)
 
           norm1=0.0_kr
           do j=1,jmax
@@ -907,7 +907,7 @@
             jnet=jp-jm
           enddo
 
-          call pcmfd(sigt,sigs,h,p,jmax,q,phi,phil,jp,jm)
+          call pcmfd(sigt,sigs,h,p,jmax,bc,q,phi,phil,jp,jm)
 
           norm1=0.0_kr
           do j=1,jmax
@@ -953,7 +953,7 @@
 
       end subroutine solve_lc
 
-      subroutine pcmfd(sigt,sigs,h,p,jmax,q,phi,phil,jp,jm)
+      subroutine pcmfd(sigt,sigs,h,p,jmax,bc,q,phi,phil,jp,jm)
 
         use global
 
@@ -961,6 +961,7 @@
 
         integer(4),    intent(in)    :: p
         integer(4),    intent(in)    :: jmax
+        integer(4),    intent(in)    :: bc(2)
         real(kind=kr), intent(in)    :: sigt
         real(kind=kr), intent(in)    :: sigs
         real(kind=kr), intent(in)    :: h
@@ -996,6 +997,8 @@
         real(kind=kr), allocatable   :: c(:)
 
         if (mod(jmax,p) /= 0) stop ' Fine mesh does not align with pCMFD.'
+        if (bc(1) /= 0) stop ' Only vacuum BC supported on left edge.'
+        if (bc(2) /= 1) stop ' Only reflective BC supported on right edge.'
 
         nmax=jmax/p
 
@@ -1104,7 +1107,7 @@
 
       end subroutine pcmfd
 
-      subroutine cmdsa(sigt,sigs,h,p,jmax,phi,phi0)
+      subroutine cmdsa(sigt,sigs,h,p,jmax,bc,phi,phi0)
 
         use global
 
@@ -1112,6 +1115,7 @@
 
         integer(4),    intent(in)    :: p
         integer(4),    intent(in)    :: jmax
+        integer(4),    intent(in)    :: bc(2)
         real(kind=kr), intent(in)    :: sigt
         real(kind=kr), intent(in)    :: sigs
         real(kind=kr), intent(in)    :: h
@@ -1134,6 +1138,8 @@
         real(kind=kr), allocatable   :: c(:)
 
         if (mod(jmax,p) /= 0) stop ' Fine mesh does not align with CMDSA.'
+        if (bc(1) /= 0) stop ' Only vacuum BC supported on left edge.'
+        if (bc(2) /= 1) stop ' Only reflective BC supported on right edge.'
 
         nmax=jmax/p
 
